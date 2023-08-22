@@ -51,12 +51,12 @@ oneway.test(ALL_Chl_a ~ Other,
             data = bioassay_3,
             var.equal = FALSE)
 
-bioassay_2_post_hoc = games_howell_test(formula = ALL_Chl_a ~ Other,
-                                        data = bioassay_2, 
+bioassay_3_post_hoc = games_howell_test(formula = ALL_Chl_a ~ Other,
+                                        data = bioassay_3, 
                                         conf.level = 0.95, 
                                         detailed = FALSE)
 
-print(bioassay_2_post_hoc, n = 22)
+print(bioassay_3_post_hoc, n = 22)
 
 #####################################################################################
 
