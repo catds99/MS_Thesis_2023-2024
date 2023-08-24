@@ -37,3 +37,30 @@ bioassay_2_fig_5 = ggplot() +
   theme_classic() 
 ggsave(bioassay_2_fig_5, filename = "figures/bioassay_2_fig_5.png",
        device = "png", height = 7, width = 11)
+
+#anova to compare treatments
+
+leveneTest(bioassay_2_PAM$FvFm ~ bioassay_2_PAM$Other)
+
+oneway.test(FvFm ~ Other,
+            data = bioassay_2_PAM,
+            var.equal = TRUE)
+
+oneway.test(FvFm ~ Other,
+            data = bioassay_2_PAM,
+            var.equal = FALSE)
+
+bioassay_2_PAM_ANOVA = aov(FvFm~Other, data=bioassay_2_PAM)
+
+bioassay_2_PAM_ANOVA
+
+bioassay_2_Tukey_PAM = tukey_hsd(bioassay_2_PAM_ANOVA, conf.level = 0.95)
+
+print(bioassay_2_Tukey_PAM, n = 25)
+
+bioassay_2_post_hoc = games_howell_test(formula = FvFm ~ Other,
+                                        data = bioassay_2_PAM, 
+                                        conf.level = 0.95, 
+                                        detailed = FALSE)
+
+print(bioassay_2_post_hoc, n = 22)
