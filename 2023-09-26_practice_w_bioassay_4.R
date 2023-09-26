@@ -101,5 +101,5 @@ bioassay_4_fig_4 = ggplot() +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
   scale_x_discrete(labels= c("T_0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic() 
-ggsave(bioassay_4_fig_4, filename = "figures/bioassay_3_fig_4.png",
+ggsave(bioassay_4_fig_4, filename = "figures/bioassay_4_fig_4.png",
        device = "png", height = 7, width = 11)
