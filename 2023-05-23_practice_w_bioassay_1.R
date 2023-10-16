@@ -34,7 +34,7 @@ bioassay_1_avg
 bioassay_1_fig_1 = ggplot() +
   geom_col(aes(x = fct_relevel(Other, "T_0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = mean_chl),
-           fill = "darkblue",
+           fill = "darkgrey",
            data = bioassay_1_avg) +
   xlab("Treatment") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
@@ -67,7 +67,7 @@ bioassay_1.2 = read_excel("data/bioassay_1.2.xlsx", sheet = 4)
 bioassay_1_fig_2 = ggplot() +
   geom_col(aes(x = fct_relevel(Treatment, "T_0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = Chl_a_change_t0),
-           fill = "darkblue",
+           fill = "darkgrey",
            data = bioassay_1.2) +
   xlab("Treatment (compared to T=0)") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
@@ -95,7 +95,7 @@ ggsave(bioassay_1_fig_3, filename = "figures/bioassay_1_fig_3.png",
 bioassay_1_fig_4 = ggplot() +
   geom_boxplot(aes(x = fct_relevel(Other, "T_0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = ALL_Chl_a),
-           fill = "darkblue",
+           fill = "darkgrey",
            data = bioassay_1) +
   xlab("Treatment") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +

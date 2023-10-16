@@ -38,7 +38,7 @@ bioassay_3_NO3 = ggplot() +
   ylab(expression(paste("Concentration of NO3 (\u03BCM)"))) +
   scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic() 
-ggsave(bioassay_3_NO3, filename = "figures/bioassay_3_NO3.png",
+ggsave(bioassay_3_NO3, filename = "nutrient_figures/bioassay_3_NO3.png",
        device = "png", height = 7, width = 11)
 
 bioassay_3_NO2 = ggplot() +
@@ -50,7 +50,7 @@ bioassay_3_NO2 = ggplot() +
   ylab(expression(paste("Concentration of NO2 (\u03BCM)"))) +
   scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic() 
-ggsave(bioassay_3_NO2, filename = "figures/bioassay_3_NO2.png",
+ggsave(bioassay_3_NO2, filename = "nutrient_figures/bioassay_3_NO2.png",
        device = "png", height = 7, width = 11)
 
 bioassay_3_NH4 = ggplot() +
@@ -62,7 +62,7 @@ bioassay_3_NH4 = ggplot() +
   ylab(expression(paste("Concentration of NH4 (\u03BCM)"))) +
   scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic() 
-ggsave(bioassay_3_NH4, filename = "figures/bioassay_3_NH4.png",
+ggsave(bioassay_3_NH4, filename = "nutrient_figures/bioassay_3_NH4.png",
        device = "png", height = 7, width = 11)
 
 bioassay_3_PO4 = ggplot() +
@@ -74,5 +74,5 @@ bioassay_3_PO4 = ggplot() +
   ylab(expression(paste("Concentration of PO4 (\u03BCM)"))) +
   scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic() 
-ggsave(bioassay_3_PO4, filename = "figures/bioassay_3_PO4.png",
+ggsave(bioassay_3_PO4, filename = "nutrient_figures/bioassay_3_PO4.png",
        device = "png", height = 7, width = 11)
