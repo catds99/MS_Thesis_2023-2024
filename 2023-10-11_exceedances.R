@@ -24,6 +24,6 @@ glimpse(clambank_nutrients)
 DIN_to_DIP_exceedances = ggplot(data = clambank_nutrients) +
   geom_line(aes(x = Year, y = Percent_of_samples)) +
   labs(x = "Year", y = "Percent of samples with DIN:DIP > 25") +
-  theme_classic()
+  theme_classic(base_size = 25)
 ggsave(DIN_to_DIP_exceedances, filename = "figures/DIN_to_DIP_exceedances.png",
        device = "png", height = 7, width = 11)
