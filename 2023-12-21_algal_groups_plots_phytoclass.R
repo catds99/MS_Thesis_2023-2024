@@ -59,8 +59,8 @@ Total_chl_a_percent_control = ggplot() +
   xlab("Treatment") +
   ylab("Percent of Control") +
   scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
-  annotate(geom="text", x=0.9, y=1000, label="Total Chl a", color="black") +
-  theme_classic(base_size = 12) 
+  theme_classic(base_size = 14) +
+  ylim(0, 1000)
 ggsave(Total_chl_a_percent_control, filename = "figures/PhytoClass/Total_chl_a_percent_control.png",
        device = "png", height = 7, width = 11)
 
@@ -74,10 +74,73 @@ Total_chl_a_percent_change = ggplot() +
   xlab("Treatment") +
   ylab("Percent Change from Control") +
   scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
-  annotate(geom="text", x=0.9, y=1000, label="Total Chl a", color="black") +
-  theme_classic(base_size = 12) 
+  theme_classic(base_size = 14) +
+  ylim(0,800)
 ggsave(Total_chl_a_percent_change, filename = "figures/PhytoClass/Total_chl_a_percent_change.png",
        device = "png", height = 7, width = 11)
+
+#Total chl a percent difference from control with stdev and percents added
+
+pc_percent_change_avg = pc_percent_change %>%
+  group_by(Treatment) %>%
+  summarise(Total_Chl_a_mean = mean(Total_Chl_a),
+            Cyanobacteria_mean = mean(Cyanobacteria),
+            Green_Algae_mean = mean(Green_Algae),
+            Cryptophytes_mean = mean(Cryptophytes),
+            Diatoms_mean = mean(Diatoms),
+            Dinoflagellates_mean = mean(Dinoflagellates),
+            Haptophytes_mean = mean(Haptophytes))
+
+total_chl_a_summary = pc_percent_change_avg %>%
+  summarise(
+    total_chl_a_sd = sd(Total_Chl_a_mean, na.rm = TRUE),
+  )
+
+pc_percent_change_summary = pc_percent_change %>%
+  group_by(Treatment) %>%
+  summarise(
+    
+    tca = mean(Total_Chl_a),
+    cyano = mean(Cyanobacteria),
+    ga = mean(Green_Algae),
+    crypto = mean(Cryptophytes),
+    dia = mean(Diatoms),
+    dino = mean(Dinoflagellates),
+    hapto = mean(Haptophytes),
+    tca_sd = sd(Total_Chl_a, na.rm = TRUE),
+    cyano_sd = sd(Cyanobacteria, na.rm = TRUE),
+    ga_sd = sd(Green_Algae, na.rm = TRUE),
+    crypto_sd = sd(Cryptophytes, na.rm = TRUE),
+    dia_sd = sd(Diatoms, na.rm = TRUE),
+    dino_sd = sd(Dinoflagellates, na.rm = TRUE),
+    hapto_sd = sd(Haptophytes, na.rm = TRUE)
+  )
+pc_percent_change_summary
+
+Total_chl_a_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = tca),
+           fill = "darkgrey",
+           data = pc_percent_change_summary) +
+  geom_errorbar(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                    y = tca,
+                    ymin = tca-tca_sd, 
+                    ymax = tca+tca_sd,
+                    width = 0.25),
+                    data = pc_percent_change_summary) +
+  geom_text(aes(label = tca, 
+                x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                y = 1350), 
+            vjust = -0.5,
+            data = pc_percent_change_summary) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  ylim(0,1400)
+ggsave(Total_chl_a_percent_change_2, filename = "figures/PhytoClass/Total_chl_a_percent_change_2.png",
+       device = "png", height = 7, width = 11)
+
 
 #Total chl a concentration by bioassay
 
@@ -130,6 +193,18 @@ Green_Algae_percent_change = ggplot() +
   annotate(geom="text", x=0.9, y=1000, label="Green Algae", color="black") +
   theme_classic(base_size = 12) 
 ggsave(Green_Algae_percent_change, filename = "figures/PhytoClass/Green_Algae_percent_change.png",
+       device = "png", height = 7, width = 11)
+
+Green_Algae_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Green_Algae_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) 
+ggsave(Green_Algae_percent_change_2, filename = "figures/PhytoClass/Green_Algae_percent_change_2.png",
        device = "png", height = 7, width = 11)
 
 #Green Algae concentration by bioassay
@@ -186,6 +261,19 @@ Cryptophytes_percent_change = ggplot() +
 ggsave(Cryptophytes_percent_change, filename = "figures/PhytoClass/Cryptophytes_percent_change.png",
        device = "png", height = 7, width = 11)
 
+Cryptophytes_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Cryptophytes_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  ylim(0, 700)
+ggsave(Cryptophytes_percent_change_2, filename = "figures/PhytoClass/Cryptophytes_percent_change_2.png",
+       device = "png", height = 7, width = 11)
+
 #Cryptophytes concentration by bioassay
 
 variable_names = list("1" = "May", "2" = "June", "3" = "July", "4" = "September")
@@ -237,6 +325,19 @@ Diatoms_percent_change = ggplot() +
   annotate(geom="text", x=0.9, y=1000, label="Diatoms", color="black") +
   theme_classic(base_size = 12) 
 ggsave(Diatoms_percent_change, filename = "figures/PhytoClass/Diatoms_percent_change.png",
+       device = "png", height = 7, width = 11)
+
+Diatoms_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Diatoms_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  ylim(0,2000)
+ggsave(Diatoms_percent_change_2, filename = "figures/PhytoClass/Diatoms_percent_change_2.png",
        device = "png", height = 7, width = 11)
 
 #Diatoms concentration by bioassay
@@ -292,6 +393,19 @@ Dinoflagellates_percent_change = ggplot() +
 ggsave(Dinoflagellates_percent_change, filename = "figures/PhytoClass/Dinoflagellates_percent_change.png",
        device = "png", height = 7, width = 11)
 
+Dinoflagellates_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Dinoflagellates_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  ylim(-50, 800)
+ggsave(Dinoflagellates_percent_change_2, filename = "figures/PhytoClass/Dinoflagellates_percent_change_2.png",
+       device = "png", height = 7, width = 11)
+
 #Dinoflagellates concentration by bioassay
 
 variable_names = list("1" = "May", "2" = "June", "3" = "July", "4" = "September")
@@ -345,6 +459,19 @@ Haptophytes_percent_change = ggplot() +
 ggsave(Haptophytes_percent_change, filename = "figures/PhytoClass/Haptophytes_percent_change.png",
        device = "png", height = 7, width = 11)
 
+Haptophytes_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Haptophytes_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  ylim(-50, 150)
+ggsave(Haptophytes_percent_change_2, filename = "figures/PhytoClass/Haptophytes_percent_change_2.png",
+       device = "png", height = 7, width = 11)
+
 #Haptophytes concentration by bioassay
 
 variable_names = list("1" = "May", "2" = "June", "3" = "July", "4" = "September")
@@ -364,4 +491,20 @@ Haptophytes_individual_bioassays = ggplot(data = pc_mean_abundances,
   theme(strip.background = element_blank(), strip.text = element_text(hjust = 0)) + 
   ylim(0, 6)
 ggsave(Haptophytes_individual_bioassays, filename = "figures/PhytoClass/Haptophytes_individual_bioassays.png",
+       device = "png", height = 7, width = 11)
+
+#########################Cyanobacteria
+
+#Haptophytes percent difference from control
+
+Cyanobacteria_percent_change_2 = ggplot() +
+  geom_col(aes(x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = Cyanobacteria_mean),
+           fill = "darkgrey",
+           data = pc_percent_change_avg) +
+  xlab("Treatment") +
+  ylab("Percent Change from Control") +
+  scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14)
+ggsave(Cyanobacteria_percent_change_2, filename = "figures/PhytoClass/Cyanobacteria_percent_change_2.png",
        device = "png", height = 7, width = 11)
