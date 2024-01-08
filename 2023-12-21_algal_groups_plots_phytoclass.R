@@ -99,7 +99,6 @@ total_chl_a_summary = pc_percent_change_avg %>%
 pc_percent_change_summary = pc_percent_change %>%
   group_by(Treatment) %>%
   summarise(
-    
     tca = mean(Total_Chl_a),
     cyano = mean(Cyanobacteria),
     ga = mean(Green_Algae),
@@ -128,16 +127,16 @@ Total_chl_a_percent_change_2 = ggplot() +
                     ymax = tca+tca_sd,
                     width = 0.25),
                     data = pc_percent_change_summary) +
-  geom_text(aes(label = tca, 
+  geom_text(aes(label = c("565.57%", "46.03%", "24.37%", "693.61%", "779.14%"), 
                 x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
-                y = 1350), 
+                y = -75), 
             vjust = -0.5,
             data = pc_percent_change_summary) +
   xlab("Treatment") +
   ylab("Percent Change from Control") +
   scale_x_discrete(labels= c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic(base_size = 14) +
-  ylim(0,1400)
+  ylim(-75,1400)
 ggsave(Total_chl_a_percent_change_2, filename = "figures/PhytoClass/Total_chl_a_percent_change_2.png",
        device = "png", height = 7, width = 11)
 

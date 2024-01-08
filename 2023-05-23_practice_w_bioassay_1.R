@@ -10,6 +10,8 @@ library(readxl)
 library(ggplot2)
 library(car)
 library(rstatix)
+library(agricolae)
+
 
 install.packages("ggpubr")
 library(ggpubr)
@@ -39,7 +41,8 @@ bioassay_1_fig_1 = ggplot() +
   xlab("Treatment") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
   scale_x_discrete(labels= c("T_0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
-  theme_classic() 
+  theme_classic(base_size = 12) +
+  ylim(0, 60)
 ggsave(bioassay_1_fig_1, filename = "figures/bioassay_1_fig_1.png",
        device = "png", height = 7, width = 11)
 
@@ -51,12 +54,24 @@ oneway.test(ALL_Chl_a ~ Other,
             data = bioassay_1,
             var.equal = FALSE)
 
+b1_aov = aov(ALL_Chl_a ~ Other, data = bioassay_1)
+
+
+oneway.test(ALL_Chl_a ~ Other,
+            data = bioassay_1,
+            var.equal = TRUE)
+
+
 bioassay_1_post_hoc = games_howell_test(formula = ALL_Chl_a ~ Other,
                   data = bioassay_1, 
                   conf.level = 0.95, 
                   detailed = FALSE)
 
 print(bioassay_1_post_hoc, n = 22)
+
+post_hoc_1 = REGW.test(y = b1_aov, "Other", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+#to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
+print(post_hoc_1)
 
 #####################################################################################
 

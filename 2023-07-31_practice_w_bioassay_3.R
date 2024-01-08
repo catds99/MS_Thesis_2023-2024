@@ -39,7 +39,8 @@ bioassay_3_fig_1 = ggplot() +
   xlab("Treatment") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
   scale_x_discrete(labels= c("T_0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
-  theme_classic() 
+  theme_classic(base_size = 12) +
+  ylim(0, 60)
 ggsave(bioassay_3_fig_1, filename = "figures/bioassay_3_fig_1.png",
        device = "png", height = 7, width = 11)
 

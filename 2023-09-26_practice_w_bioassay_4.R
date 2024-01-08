@@ -1,7 +1,7 @@
-#2023-07-31
+#2023-09-26
 #CDS
 
-#practice analyzing bioassay 3
+#practice analyzing bioassay 4
 
 library(tidyverse)
 library(dplyr)
@@ -39,7 +39,11 @@ bioassay_4_fig_1 = ggplot() +
   xlab("Treatment") +
   ylab(expression(paste("Chl a \u03BCg", l^-1))) +
   scale_x_discrete(labels= c("T_0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
-  theme_classic() 
+  theme_classic(base_size = 12) +
+  ylim(0, 60) + 
+  annotate(geom="text", x=1, y=57, label="September",
+                        color="black", 
+                        size = 5.5)
 ggsave(bioassay_4_fig_1, filename = "figures/bioassay_4_fig_1.png",
        device = "png", height = 7, width = 11)
 
