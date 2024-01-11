@@ -242,6 +242,13 @@ B1_ln_REGW = REGW.test(y = B1_ln_aov, "Treatment", alpha = 0.05, group = FALSE, 
 #to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
 print(B1_ln_REGW)
 
+B1_ln_GH = games_howell_test(formula = ln_concentration ~ Treatment,
+                          data = B1, 
+                          conf.level = 0.95, 
+                          detailed = FALSE)
+
+print(B1_ln_GH, n = 22)
+
 ######################B2
 
 #Check for normality
@@ -267,6 +274,13 @@ summary(B2_ln_aov)
 B2_ln_REGW = REGW.test(y = B2_ln_aov, "Treatment", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
 #to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
 print(B2_ln_REGW)
+
+B2_ln_GH = games_howell_test(formula = ln_concentration ~ Treatment,
+                             data = B2, 
+                             conf.level = 0.95, 
+                             detailed = FALSE)
+
+print(B2_ln_GH, n = 22)
 
 ######################B3
 
@@ -294,6 +308,13 @@ B3_ln_REGW = REGW.test(y = B3_ln_aov, "Treatment", alpha = 0.05, group = FALSE, 
 #to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
 print(B3_ln_REGW)
 
+B3_ln_GH = games_howell_test(formula = ln_concentration ~ Treatment,
+                             data = B3, 
+                             conf.level = 0.95, 
+                             detailed = FALSE)
+
+print(B3_ln_GH, n = 22)
+
 ######################B4
 
 #Check for normality
@@ -319,3 +340,10 @@ summary(B4_ln_aov)
 B4_ln_REGW = REGW.test(y = B4_ln_aov, "Treatment", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
 #to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
 print(B4_ln_REGW)
+
+B4_ln_GH = games_howell_test(formula = ln_concentration ~ Treatment,
+                             data = B4, 
+                             conf.level = 0.95, 
+                             detailed = FALSE)
+
+print(B4_ln_GH, n = 22)

@@ -33,13 +33,18 @@ glimpse(pc_abundances)
 
 #####LDA
 
-pc_abundances_lda = lda(x = pc_abundances, grouping = pc_abundances$Treatment)
-pc_abundances_lda
+#pc_abundances_lda = lda(x = pc_abundances, grouping = pc_abundances$Treatment)
+#pc_abundances_lda
 
 pc_abundances_lda <- lda(Treatment ~ ., data=pc_abundances)
 pc_abundances_lda
 
+print(pc_abundances_lda)
+
 pc_abundances_lda_values <- predict(pc_abundances_lda)
+
+# Model accuracy
+mean(pc_abundances_lda_values$class==pc_abundances$Treatment)
 
 ldahist(data = pc_abundances_lda_values$x[,1], g=pc_abundances$Treatment)
 
