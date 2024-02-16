@@ -13,7 +13,7 @@ library(broom)
 
 #import data:
 
-all_groups_percent_changes = read_excel("data/PhytoClass_Data.xlsx", sheet = "percent_change")
+all_groups_percent_changes = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/PhytoClass_Data.xlsx", sheet = "percent_change")
 
 summary(all_groups_percent_changes)
 glimpse(all_groups_percent_changes)
@@ -76,6 +76,8 @@ glimpse(pc_all_groups_biomass)
 #MANOVA
 
 # model = lm(DV ~ main_effect + blocking_factor, data = data)
+
+# model = lm(DV ~ main_effect + factor(blocking_factor), data = data)
 
 all_groups_biomass_model = lm(cbind(Cyanobacteria, Green_Algae, Cryptophytes, Diatoms, Dinoflagellates, Haptophytes) ~ Treatment + Bioassay, 
                               data = pc_all_groups_biomass)

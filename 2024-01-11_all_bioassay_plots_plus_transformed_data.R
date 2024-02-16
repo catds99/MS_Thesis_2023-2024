@@ -9,9 +9,13 @@ library(ggplot2)
 library(car)
 library(rstatix)
 
+dev.off()
+
 #reference code:
 
-pc_mean_abundances = read_excel("data/PhytoClass_data.xlsx", sheet = "mean_abundances")
+setwd()
+
+pc_mean_abundances = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/PhytoClass_data.xlsx", sheet = "mean_abundances")
 
 summary(pc_mean_abundances)
 glimpse(pc_mean_abundances)
@@ -35,7 +39,7 @@ Total_Chl_a_individual_bioassays = ggplot(data = pc_mean_abundances,
 ggsave(Total_Chl_a_individual_bioassays, filename = "figures/PhytoClass/Total_Chl_a_individual_bioassays.png",
        device = "png", height = 7, width = 11)
 
-pc_percent_change = read_excel("data/PhytoClass_data.xlsx", sheet = "percent_change")
+pc_percent_change = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/PhytoClass_data.xlsx", sheet = "percent_change")
 
 summary(pc_percent_change)
 glimpse(pc_percent_change)
@@ -88,7 +92,7 @@ ggsave(Total_chl_a_percent_change_2, filename = "figures/PhytoClass/Total_chl_a_
 ###################################################################################
 
 
-B1 = read_excel("data/all_bioassays_percents.xlsx", sheet = "B1")
+B1 = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/all_bioassays_percents.xlsx", sheet = "B1")
 
 glimpse(B1)
 
@@ -102,8 +106,32 @@ B1_summary = B1 %>%
   )
 B1_summary
 
+#B1_plot = ggplot(data = B1_summary, 
+#       aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
+#  geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+#               y = mean),
+#           fill = "darkgrey",
+#           data = B1_summary) +
+#  geom_errorbar(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+#                    y = mean,
+#                    ymin = mean-sd, 
+#                    ymax = mean+sd,
+#                    width = 0.25),
+#                data = B1_summary) +
+#  xlab("Treatment") +
+#  ylab(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")))+
+#  scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+#  theme_classic(base_size = 14) +
+#  theme(axis.title.x=element_blank())+
+#  geom_text(aes(label = c("3.52", "21.4", "28.9", "22.4", "4.39", "5.12", "5.18"), 
+#               x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+#               y = -5), 
+#           vjust = -0.5,
+#           data = B1_summary) +
+#  ylim(-5, 60)
+
 B1_plot = ggplot(data = B1_summary, 
-       aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
+                 aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
   geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = mean),
            fill = "darkgrey",
@@ -118,15 +146,18 @@ B1_plot = ggplot(data = B1_summary,
   ylab(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")))+
   scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
   theme_classic(base_size = 14) +
-  theme(axis.title.x=element_blank())+
   geom_text(aes(label = c("3.52", "21.4", "28.9", "22.4", "4.39", "5.12", "5.18"), 
-               x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
-               y = -5), 
-           vjust = -0.5,
-           data = B1_summary) +
-  ylim(-5, 60)
+                x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                y = 65), 
+            vjust = -0.5,
+            data = B1_summary) +
+  ylim(-5, 75)
 
-B2 = read_excel("data/all_bioassays_percents.xlsx", sheet = "B2")
+
+B1_flipped = B1_plot + coord_flip()
+
+
+B2 = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/all_bioassays_percents.xlsx", sheet = "B2")
 
 glimpse(B2)
 
@@ -140,7 +171,7 @@ B2_summary = B2 %>%
   )
 B2_summary
 
-B2_plot = ggplot(data = B2_summary, 
+#B2_plot = ggplot(data = B2_summary, 
        aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
   geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = mean),
@@ -164,7 +195,33 @@ B2_plot = ggplot(data = B2_summary,
             data = B2_summary) +
   ylim(-5, 60)
 
-B3 = read_excel("data/all_bioassays_percents.xlsx", sheet = "B3")
+B2_plot = ggplot(data = B2_summary, 
+                 aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
+  geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = mean),
+           fill = "darkgrey",
+           data = B2_summary) +
+  geom_errorbar(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                    y = mean,
+                    ymin = mean-sd, 
+                    ymax = mean+sd,
+                    width = 0.25),
+                data = B2_summary) +
+  xlab("Treatment") +
+  ylab(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")))+
+  scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  theme(axis.title.y=element_blank())+
+  geom_text(aes(label = c("3.38", "25.7", "51.2", "49.1", "4.70", "5.06", "5.38"), 
+                x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                y = 65), 
+            vjust = -0.5,
+            data = B2_summary) +
+  ylim(-5, 75)
+
+B2_flipped = B2_plot + coord_flip()
+
+B3 = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/all_bioassays_percents.xlsx", sheet = "B3")
 
 glimpse(B3)
 
@@ -178,7 +235,7 @@ B3_summary = B3 %>%
   )
 B3_summary
 
-B3_plot = ggplot(data = B3_summary, 
+#B3_plot = ggplot(data = B3_summary, 
        aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
   geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = mean),
@@ -201,7 +258,33 @@ B3_plot = ggplot(data = B3_summary,
             data = B3_summary) +
   ylim(-5, 60)
 
-B4 = read_excel("data/all_bioassays_percents.xlsx", sheet = "B4")
+B3_plot = ggplot(data = B3_summary, 
+                 aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
+  geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = mean),
+           fill = "darkgrey",
+           data = B3_summary) +
+  geom_errorbar(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                    y = mean,
+                    ymin = mean-sd, 
+                    ymax = mean+sd,
+                    width = 0.25),
+                data = B3_summary) +
+  xlab("Treatment") +
+  ylab(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")))+
+  scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  theme(axis.title.y=element_blank())+
+  geom_text(aes(label = c("4.15", "26.5", "27.4", "23.7", "4.08", "5.24", "4.86"), 
+                x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                y = 65), 
+            vjust = -0.5,
+            data = B3_summary) +
+  ylim(-5, 75)
+
+B3_flipped = B3_plot + coord_flip()
+
+B4 = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/all_bioassays_percents.xlsx", sheet = "B4")
 
 glimpse(B4)
 
@@ -215,7 +298,7 @@ B4_summary = B4 %>%
   )
 B4_summary
 
-B4_plot = ggplot(data = B4_summary, 
+#B4_plot = ggplot(data = B4_summary, 
        aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
   geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
                y = mean),
@@ -239,6 +322,31 @@ B4_plot = ggplot(data = B4_summary,
             data = B4_summary) +
   ylim(-5, 60)
 
+B4_plot = ggplot(data = B4_summary, 
+                 aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), y=mean)) +
+  geom_col(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+               y = mean),
+           fill = "darkgrey",
+           data = B4_summary) +
+  geom_errorbar(aes(x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                    y = mean,
+                    ymin = mean-sd, 
+                    ymax = mean+sd,
+                    width = 0.25),
+                data = B4_summary) +
+  xlab("Treatment") +
+  ylab(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")))+
+  scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", "DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 14) +
+  theme(axis.title.y=element_blank())+
+  geom_text(aes(label = c("7.07", "46.3", "36.8", "36.6", "9.59", "11.5", "14.1"), 
+                x = fct_relevel(Treatment, "T0", "Control", "DIN", "LP", "HP", "DIN_LP", "DIN_HP"), 
+                y = 65), 
+            vjust = -0.5,
+            data = B4_summary) +
+  ylim(-5, 75)
+
+B4_flipped = B4_plot + coord_flip()
 
 biomass_plot = ggarrange(B1_plot, B2_plot, B3_plot, B4_plot,
                               labels = c("A", "B", "C", "D"),
@@ -246,6 +354,31 @@ biomass_plot = ggarrange(B1_plot, B2_plot, B3_plot, B4_plot,
 
 ggsave(biomass_plot, filename = "figures/biomass_plot.png",
        device = "png", height = 10, width = 11)
+
+biomass_plot_2 = ggarrange(B1_flipped, B2_flipped, B3_flipped, B4_flipped,
+                         labels = c("A", "B", "C", "D"),
+                         ncol = 4, 
+                         nrow = 1,
+                         common.legend = TRUE, legend = "bottom")
+
+require(grid)
+
+biomass_plot_3 = ggarrange(B1_flipped + rremove("xlab"), B2_flipped + rremove("xlab"), B3_flipped + rremove("xlab"), B4_flipped + rremove("xlab"),
+          labels = c("A", "B", "C", "D"),
+          ncol = 4, 
+          nrow = 1,
+          common.legend = TRUE, legend = "bottom")
+
+new_biomass_plot = annotate_figure(biomass_plot_3, bottom = textGrob(expression(paste("Total Chl", italic("a"), "(", mu, "g", l^-1,")", sep="")), gp = gpar(cex = 1.15)))
+
+ggsave(new_biomass_plot, filename = "C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/figures/new_biomass_plot.png",
+       device = "png", height = 12, width = 15)
+
+
+######facet 
+
+
+
 
 #####################################################same but ln
 

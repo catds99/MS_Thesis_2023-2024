@@ -18,7 +18,7 @@ library(MASS)
 
 #import data:
 
-pc_Absolute_Abundances = read_excel("data/PhytoClass_data.xlsx", sheet = "Absolute_Abundances")
+pc_Absolute_Abundances = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/PhytoClass_data.xlsx", sheet = "Absolute_Abundances")
 
 summary(pc_Absolute_Abundances)
 glimpse(pc_Absolute_Abundances)
@@ -49,8 +49,10 @@ mean(pc_abundances_lda_values$class==pc_abundances$Treatment)
 ldahist(data = pc_abundances_lda_values$x[,1], g=pc_abundances$Treatment)
 
 
-plot(pc_abundances_lda_values$x[,1],pc_abundances_lda_values$x[,2]) # make a scatterplot
-text(pc_abundances_lda_values$x[,1],pc_abundances_lda_values$x[,2],pc_abundances$Treatment,cex=0.7,pos=4,col="red")
+#plot(pc_abundances_lda_values$x[,1],pc_abundances_lda_values$x[,2]) # make a scatterplot
+#text(pc_abundances_lda_values$x[,1],pc_abundances_lda_values$x[,2],pc_abundances$Treatment,cex=0.7,pos=4,col="red")
+
+####################################plot
 
 newdata = data.frame(type = pc_abundances[,1], lda = pc_abundances_lda_values$x)
 
@@ -61,6 +63,8 @@ lda_plot = ggplot(newdata) +
   theme_classic(base_size = 14)
 ggsave(lda_plot, filename = "figures/PhytoClass/lda_plot.png",
        device = "png", height = 7, width = 11)
+
+#some attempts at adjusting legend:
 
 scale_x_discrete(labels= c("T0" = "Time Zero", "Control" = "Control", 
                            "DIN" = "DIN", "LP" = "LP", "HP" = "HP", 
