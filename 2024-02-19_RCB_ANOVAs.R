@@ -38,6 +38,10 @@ cyano_aov = aov(Cyanobacteria ~ Treatment + factor(Bioassay), data = pc_abundanc
 
 summary(cyano_aov)
 
+cyano_aov_2 = aov(Cyanobacteria ~ Treatment + Bioassay, data = pc_abundances)
+
+summary(cyano_aov_2)
+
 ############Green Algae
 
 ga_aov = aov(Green_Algae ~ Treatment + factor(Bioassay), data = pc_abundances)
