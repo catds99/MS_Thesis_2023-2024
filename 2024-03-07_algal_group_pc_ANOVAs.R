@@ -30,6 +30,10 @@ phytoclass = read_excel("data/2024-02-20_Percent_change_data.xlsx", sheet = "2")
 
 glimpse(phytoclass)
 
+phytoclass_dh =  read_excel("data/2024-03-12_percent_change_data_with_dh.xlsx", sheet = "Sheet2")
+
+glimpse(phytoclass_dh)
+
 ###################### biomass data frame
 
 biomass = phytoclass %>%
@@ -45,8 +49,14 @@ percent_change = phytoclass %>%
 glimpse(percent_change)
 
 
+percent_change_dh = phytoclass_dh %>%
+    select(Bioassay_3, Treatment_3, Total_Chl_a_4, Cyanobacteria_4, Green_Algae_4, Cryptophytes_4, Dinoflagellates_4, dh_4)
+
+glimpse(percent_change)
 
 
+percent_change_dh = phytoclass_dh %>%
+  select(Bioassay_3, Treatment_3, Total_Chl_a_4, Cyanobacteria_4, Green_Algae_4, Cryptophytes_4, Dinoflagellates_4, dh_4)
 
 
 
@@ -317,6 +327,55 @@ REGW_hapto.2 = REGW.test(y = hapto.aov.3, "Treatment_3", alpha = 0.05, group = F
     #to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
 print(REGW_hapto.2)
     #DIN group significantly greater than DIN combined groups
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################# Diatoms/Haptophytes
+
+############### two-way anova biomass
+
+#hapto.aov.1 = aov(Haptophytes ~ Treatment + factor(Bioassay), data = biomass)
+
+#summary(hapto.aov.1)
+
+############### one-way anova percent change
+
+dh.aov.2 = aov(dh_4 ~ Treatment_3, data = percent_change_dh)
+
+summary(dh.aov.2)
+
+############### two-way anova percent change
+
+dh.aov.3 = aov(dh_4 ~ Treatment_3 + factor(Bioassay_3), data = percent_change_dh)
+
+summary(dh.aov.3)
+
+############### post-hoc
+
+REGW_dh = REGW.test(y = dh.aov.2, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+#to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
+print(REGW_hapto)
+#DIN group significantly greater than DIN combined groups
+
+REGW_dh.2 = REGW.test(y = dh.aov.3, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+#to get groups of treatments, use group = TRUE, for comparisons and p-values of all treatments use group = FALSE
+print(REGW_dh.2)
+#DIN group significantly greater than DIN combined groups
 
 
 

@@ -18,7 +18,7 @@ library(MASS)
 
 #import data:
 
-pc_Absolute_Abundances = read_excel("C:/Users/cathe/Desktop/MS Thesis/MS_Thesis_2023-2024/data/PhytoClass_data.xlsx", sheet = "Absolute_Abundances")
+pc_Absolute_Abundances = read_excel("data/PhytoClass_data.xlsx", sheet = "Absolute_Abundances")
 
 summary(pc_Absolute_Abundances)
 glimpse(pc_Absolute_Abundances)

@@ -1,5 +1,5 @@
 #2024-02-22 
-#PERMANOVAS for community composition with PhytoClass Data, new percent cahnge data
+#PERMANOVAS for community composition with PhytoClass Data, new percent change data
 
 library(tidyverse)
 library(dplyr)
@@ -14,6 +14,12 @@ library(broom)
 install.packages("vegan")
 
 library(vegan)
+
+install.packages("microbiome")
+library(microbiome)
+
+av <- available.packages(filters=list())
+av[av[, "microbiome"] == microbiome, ]
 
 ##################################import data
 
@@ -57,11 +63,29 @@ print(percent_change_1_way_decimal)
 
 
 
+###DV = percent composition/relative abundance, factor = treatment
+
+rel_data = read_excel("data/2024-03-11_relative_abundance.xlsx", sheet = "Sheet1")
+
+glimpse(rel_data)
+
+relative_abundance_1_way = adonis2(rel_data[ , c("percent_cyano", "percent_ga", "percent_crypto", "percent_diatom", "percent_dino", "percent_hapto")] ~ Treatment,
+                               data = rel_data,
+                               method = "euc")
+
+print(relative_abundance_1_way)
+
+
+p = plot_landscape(rel_data, method = "NMDS", distance = "euc", col = "Treatment", size = 3)
+print(p)
 
 
 
-
-
+install.packages('devtools')
+library(devtools)
+install_github("pmartinezarbizu/pairwiseAdonis/pairwiseAdonis") library(pairwise.adonis)
+pair.mod<-pairwise.adonis(biotafilename,factors=factorfilename$factorname)
+pair.mod
 
 
 
