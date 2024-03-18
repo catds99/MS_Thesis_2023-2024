@@ -11,6 +11,7 @@ library(rstatix)
 library(ggpubr)
 theme_set(theme_pubr())
 
+library(grid)
 
 ####### import data
 
@@ -70,6 +71,55 @@ b1_comm_comp_dh = ggarrange(b1_biomass_dh, b1_percent_change_2_dh,
 
 ggsave(b1_comm_comp_dh, filename = "figures/b1_comm_comp_dh.png",
        device = "png", height = 12, width = 17)
+
+
+
+
+b1_din = textGrob("110:1", gp=gpar(fontsize=30))
+b1_lp = textGrob("0.270:1", gp=gpar(fontsize=30))
+b1_hp = textGrob("0.0695:1", gp=gpar(fontsize=30))
+b1_din_lp = textGrob("4.12:1", gp=gpar(fontsize=30))
+b1_din_hp = textGrob("1.060:1", gp=gpar(fontsize=30))
+
+
+
+
+
+
+######### percent change plot offset
+
+b1_percent_change_2_dh_ratio = ggplot(percent_change_dh, aes(fill = Group, y = Bioassay_1, x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"))) +
+  geom_bar(position = position_dodge(), stat = "identity") +
+  scale_fill_manual(values = group_colors) +
+  geom_hline(yintercept=0, linetype="dashed", color = "black", linewidth = 1) +
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5), linetype="solid", color = "black", linewidth = 0.5) +
+  ylab("Percent Change") + 
+  xlab("Treatment") + 
+  labs(fill = 'Group') +
+  scale_x_discrete(labels = c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme(plot.margin = unit(c(1,1,2,1), "lines")) +
+  annotation_custom(b1_din, xmin = 1, xmax = 1, ymin = -500, ymax = -500) + 
+  annotation_custom(b1_lp, xmin = 2, xmax = 2, ymin = -500, ymax = -500) + 
+  annotation_custom(b1_hp, xmin = 3, xmax = 3, ymin = -500, ymax = -500) + 
+  annotation_custom(b1_din_lp, xmin = 4, xmax = 4, ymin = -500, ymax = -500) + 
+  annotation_custom(b1_din_hp, xmin = 5, xmax = 5, ymin = -500, ymax = -500) +
+  theme_classic(base_size = 30) +
+  coord_cartesian(clip = "off")
+  
+
+ggsave(b1_percent_change_2_dh_ratio, filename = "figures/b1_community_percent_change_2_dh_ratio.png",
+       device = "png", height = 14, width = 17)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

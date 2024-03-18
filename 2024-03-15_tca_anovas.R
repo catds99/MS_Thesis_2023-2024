@@ -85,3 +85,81 @@ summary(b1.tca.aov)
 REGW_b1_tca = REGW.test(y = b1.tca.aov, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
 
 REGW_b1_tca
+
+
+
+
+
+
+
+
+
+
+
+######################################### Bioassay 2
+
+############### one-way anova percent change
+
+b2.tca.aov = aov(Total_Chl_a_4 ~ Treatment_3, data = b2)
+
+summary(b2.tca.aov)
+
+REGW_b2_tca = REGW.test(y = b2.tca.aov, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+
+REGW_b2_tca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################################### Bioassay 3
+
+############### one-way anova percent change
+
+b3.tca.aov = aov(Total_Chl_a_4 ~ Treatment_3, data = b3)
+
+summary(b3.tca.aov)
+
+REGW_b3_tca = REGW.test(y = b3.tca.aov, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+
+REGW_b3_tca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################################### Bioassay 4
+
+############### one-way anova percent change
+
+b4.tca.aov = aov(Total_Chl_a_4 ~ Treatment_3, data = b4)
+
+summary(b4.tca.aov)
+
+REGW_b4_tca = REGW.test(y = b4.tca.aov, "Treatment_3", alpha = 0.05, group = FALSE, main = NULL, console = FALSE)
+
+REGW_b4_tca

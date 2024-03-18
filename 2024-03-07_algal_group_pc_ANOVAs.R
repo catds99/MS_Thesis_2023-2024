@@ -50,9 +50,9 @@ glimpse(percent_change)
 
 
 percent_change_dh = phytoclass_dh %>%
-    select(Bioassay_3, Treatment_3, Total_Chl_a_4, Cyanobacteria_4, Green_Algae_4, Cryptophytes_4, Dinoflagellates_4, dh_4)
+    dplyr::select(Bioassay_3, Treatment_3, Total_Chl_a_4, Cyanobacteria_4, Green_Algae_4, Cryptophytes_4, Dinoflagellates_4, dh_4)
 
-glimpse(percent_change)
+glimpse(percent_change_dh)
 
 
 percent_change_dh = phytoclass_dh %>%
@@ -60,7 +60,7 @@ percent_change_dh = phytoclass_dh %>%
 
 
 
-
+colnames(phytoclass_dh)
 
 
 
