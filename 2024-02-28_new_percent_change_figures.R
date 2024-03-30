@@ -41,6 +41,8 @@ summary = summary[-c(21), ]
 
 summary$Bioassay_3 = factor(summary$Bioassay_3, levels=c("May", "June", "July", "September")) 
 
+print(summary)
+
 summary_dh = pc_dh %>%
   group_by(Bioassay_3, Treatment_3) %>%
   summarise(
@@ -51,6 +53,8 @@ summary_dh = pc_dh %>%
 summary_dh = summary_dh[-c(21), ]
 
 summary_dh$Bioassay_3 = factor(summary_dh$Bioassay_3, levels=c("May", "June", "July", "September")) 
+
+print(summary_dh)
 
 ######################################## total chl a
 

@@ -63,6 +63,23 @@ b1_percent_change_2_dh = ggplot(percent_change_dh, aes(fill = Group, y = Bioassa
 ggsave(b1_percent_change_2_dh, filename = "figures/b1_community_percent_change_2_dh.png",
        device = "png", height = 12, width = 15)
 
+b1_percent_change_2_dh_sd = ggplot(pc_dh_sd, aes(fill = Group, y = Bioassay_1, x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"))) +
+  geom_bar(position = position_dodge(), stat = "identity") +
+  geom_errorbar(aes(ymin=Bioassay_1-B1_sd, ymax=Bioassay_1+B1_sd), 
+                width = 0.25,
+                position=position_dodge(0.9)) +
+  scale_fill_manual(values = group_colors) +
+  geom_hline(yintercept=0, linetype="dashed", color = "black", linewidth = 1) +
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5), linetype="solid", color = "black", linewidth = 0.5) +
+  ylab("Percent Change") + 
+  xlab("Treatment") + 
+  labs(fill = 'Group') +
+  scale_x_discrete(labels = c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 30)
+
+ggsave(b1_percent_change_2_dh_sd, filename = "figures/b1_community_percent_change_2_dh_sd.png",
+       device = "png", height = 12, width = 15)
+
 ######### combined figure
 
 b1_comm_comp_dh = ggarrange(b1_biomass_dh, b1_percent_change_2_dh,
@@ -72,6 +89,12 @@ b1_comm_comp_dh = ggarrange(b1_biomass_dh, b1_percent_change_2_dh,
 ggsave(b1_comm_comp_dh, filename = "figures/b1_comm_comp_dh.png",
        device = "png", height = 12, width = 17)
 
+b1_comm_comp_dh_sd = ggarrange(b1_biomass_dh, b1_percent_change_2_dh_sd,
+                            labels = c("A", "B"),
+                            nrow = 2)
+
+ggsave(b1_comm_comp_dh_sd, filename = "figures/b1_comm_comp_dh_sd.png",
+       device = "png", height = 12, width = 17)
 
 
 
@@ -157,6 +180,24 @@ b2_percent_change_2_dh = ggplot(percent_change_dh, aes(fill = Group, y = Bioassa
 ggsave(b2_percent_change_2_dh, filename = "figures/b2_community_percent_change_2_dh.png",
        device = "png", height = 12, width = 15)
 
+
+b2_percent_change_2_dh_sd = ggplot(pc_dh_sd, aes(fill = Group, y = Bioassay_2, x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"))) +
+  geom_bar(position = position_dodge(), stat = "identity") +
+  geom_errorbar(aes(ymin=Bioassay_2-B2_sd, ymax=Bioassay_2+B2_sd), 
+                width = 0.25,
+                position=position_dodge(0.9)) +
+  scale_fill_manual(values = group_colors) +
+  geom_hline(yintercept=0, linetype="dashed", color = "black", linewidth = 1) +
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5), linetype="solid", color = "black", linewidth = 0.5) +
+  ylab("Percent Change") + 
+  xlab("Treatment") + 
+  labs(fill = 'Group') +
+  scale_x_discrete(labels = c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 30)
+
+ggsave(b2_percent_change_2_dh_sd, filename = "figures/b2_community_percent_change_2_dh_sd.png",
+       device = "png", height = 12, width = 15)
+
 ######### combined figure
 
 b2_comm_comp_dh = ggarrange(b2_biomass_dh, b2_percent_change_2_dh,
@@ -165,6 +206,18 @@ b2_comm_comp_dh = ggarrange(b2_biomass_dh, b2_percent_change_2_dh,
 
 ggsave(b2_comm_comp_dh, filename = "figures/b2_comm_comp_dh.png",
        device = "png", height = 12, width = 17)
+
+
+b2_comm_comp_dh_sd = ggarrange(b2_biomass_dh, b2_percent_change_2_dh_sd,
+                               labels = c("A", "B"),
+                               nrow = 2)
+
+ggsave(b2_comm_comp_dh_sd, filename = "figures/b2_comm_comp_dh_sd.png",
+       device = "png", height = 12, width = 17)
+
+
+
+
 
 
 
@@ -208,6 +261,23 @@ b3_percent_change_2_dh = ggplot(percent_change_dh, aes(fill = Group, y = Bioassa
 ggsave(b3_percent_change_2_dh, filename = "figures/b3_community_percent_change_2_dh.png",
        device = "png", height = 12, width = 15)
 
+b3_percent_change_2_dh_sd = ggplot(pc_dh_sd, aes(fill = Group, y = Bioassay_3, x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"))) +
+  geom_bar(position = position_dodge(), stat = "identity") +
+  geom_errorbar(aes(ymin=Bioassay_3-B3_sd, ymax=Bioassay_3+B3_sd), 
+                width = 0.25,
+                position=position_dodge(0.9)) +
+  scale_fill_manual(values = group_colors) +
+  geom_hline(yintercept=0, linetype="dashed", color = "black", linewidth = 1) +
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5), linetype="solid", color = "black", linewidth = 0.5) +
+  ylab("Percent Change") + 
+  xlab("Treatment") + 
+  labs(fill = 'Group') +
+  scale_x_discrete(labels = c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 30)
+
+ggsave(b3_percent_change_2_dh_sd, filename = "figures/b3_community_percent_change_2_dh_sd.png",
+       device = "png", height = 12, width = 15)
+
 ######### combined figure
 
 b3_comm_comp_dh = ggarrange(b3_biomass_dh, b3_percent_change_2_dh,
@@ -216,6 +286,20 @@ b3_comm_comp_dh = ggarrange(b3_biomass_dh, b3_percent_change_2_dh,
 
 ggsave(b3_comm_comp_dh, filename = "figures/b3_comm_comp_dh.png",
        device = "png", height = 12, width = 17)
+
+b3_comm_comp_dh_sd = ggarrange(b3_biomass_dh, b3_percent_change_2_dh_sd,
+                               labels = c("A", "B"),
+                               nrow = 2)
+
+ggsave(b3_comm_comp_dh_sd, filename = "figures/b3_comm_comp_dh_sd.png",
+       device = "png", height = 12, width = 17)
+
+
+
+
+
+
+
 
 
 
@@ -258,6 +342,24 @@ b4_percent_change_2_dh = ggplot(percent_change_dh, aes(fill = Group, y = Bioassa
 ggsave(b4_percent_change_2_dh, filename = "figures/b4_community_percent_change_2_dh.png",
        device = "png", height = 12, width = 15)
 
+b4_percent_change_2_dh_sd = ggplot(pc_dh_sd, aes(fill = Group, y = Bioassay_4, x = fct_relevel(Treatment, "DIN", "LP", "HP", "DIN_LP", "DIN_HP"))) +
+  geom_bar(position = position_dodge(), stat = "identity") +
+  geom_errorbar(aes(ymin=Bioassay_4-B4_sd, ymax=Bioassay_4+B4_sd), 
+                width = 0.25,
+                position=position_dodge(0.9)) +
+  scale_fill_manual(values = group_colors) +
+  geom_hline(yintercept=0, linetype="dashed", color = "black", linewidth = 1) +
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5), linetype="solid", color = "black", linewidth = 0.5) +
+  ylab("Percent Change") + 
+  xlab("Treatment") + 
+  labs(fill = 'Group') +
+  scale_x_discrete(labels = c("DIN" = "DIN", "LP" = "LP", "HP" = "HP", "DIN_LP" = "DIN + LP", "DIN_HP" = "DIN + HP")) +
+  theme_classic(base_size = 30)
+
+ggsave(b4_percent_change_2_dh_sd, filename = "figures/b4_community_percent_change_2_dh_sd.png",
+       device = "png", height = 12, width = 15)
+
+
 ######### combined figure
 
 b4_comm_comp_dh = ggarrange(b1_biomass_dh, b4_percent_change_2_dh,
@@ -266,3 +368,12 @@ b4_comm_comp_dh = ggarrange(b1_biomass_dh, b4_percent_change_2_dh,
 
 ggsave(b4_comm_comp_dh, filename = "figures/b4_comm_comp_dh.png",
        device = "png", height = 12, width = 17)
+
+
+b4_comm_comp_dh_sd = ggarrange(b4_biomass_dh, b4_percent_change_2_dh_sd,
+                               labels = c("A", "B"),
+                               nrow = 2)
+
+ggsave(b4_comm_comp_dh_sd, filename = "figures/b4_comm_comp_dh_sd.png",
+       device = "png", height = 12, width = 17)
+
